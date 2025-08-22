@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Telegram Jualan Premium + License Server System</title>
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bg-dark-primary: #0f1115;
+            --bg-dark-secondary: #181b20;
+            --text-dark-primary: #f8f9fa;
+            --text-dark-secondary: #e9ecef;
+            --accent-color: #6c5ce7;
+            --accent-hover: #5d4fd6;
+            --success-color: #00b894;
+            --warning-color: #fdcb6e;
+            --danger-color: #d63031;
+            --transition: all 0.3s ease;
+        }
+        
+        [data-theme="light"] {
+            --bg-light-primary: #ffffff;
+            --bg-light-secondary: #f8f9fa;
+            --text-light-primary: #212529;
+            --text-light-secondary: #495057;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-dark-primary);
+            transition: var(--transition);
+        }
+        
+        body.light-mode {
+            background-color: var(--bg-light-primary);
+            color: var(--text-light-primary);
+        }
+        
+        .light-mode .bg-dark {
+            background-color: var(--bg-light-secondary) !important;
+            color: var(--text-light-primary) !important;
+        }
+        
+        .light-mode .card {
+            background-color: var(--bg-light-secondary);
+            color: var(--text-light-primary);
+            border-color: #dee2e6;
+        }
+        
+        .light-mode .text-white {
+            color: var(--text-light-primary) !important;
+        }
+        
+        .light-mode .text-muted {
+            color: #6c757d !important;
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+            transition: var(--transition);
+            background-color: rgba(15, 17, 21, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .light-mode .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+        
+        .navbar.shrink {
+            padding: 0.5rem 0;
+        }
+        
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to bottom right, var(--bg-dark-primary), var(--bg-dark-secondary));
+        }
+        
+        .light-mode .hero-section {
+            background: linear-gradient(to bottom right, var(--bg-light-primary), var(--bg-light-secondary));
+        }
+        
+        .value-prop li {
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .value-prop li:hover {
+            transform: translateX(5px);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+        
+        .btn-outline-primary {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .feature-card {
+            transition: var(--transition);
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light-mode .feature-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .security-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .pricing-card {
+            transition: var(--transition);
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .recommended {
+            border: 2px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .countdown-box {
+            background: linear-gradient(45deg, var(--accent-color), var(--danger-color));
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .countdown-item {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            padding: 0.5rem;
+            min-width: 70px;
+        }
+        
+        .floating-action {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .floating-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .floating-buttons .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chart-container {
+            height: 200px;
+            position: relative;
+        }
+        
+        .mini-chart {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .testimonial-card {
+            transition: var(--transition);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .quick-order-code {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quick-order-code:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .copied-tooltip {
+            position: absolute;
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .copied-tooltip.show {
+            opacity: 1;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* Accessibility improvements */
+        a:focus, button:focus, .form-control:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .btn {
+                border-width: 2px;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#beranda">
+                <i class="bi bi-robot me-2"></i>BOT LICENSE SYSTEM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fitur">Fitur</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#keamanan">Keamanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pembayaran">Pembayaran</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#analytics">Analytics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#harga">Paket & Harga</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+                </ul>
+                <div class="ms-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="themeToggle">
+                        <label class="form-check-label" for="themeToggle">
+                            <i class="bi bi-sun-fill"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section" id="beranda">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate-fade-in">
+                    <h1 class="display-4 fw-bold mb-3">BOT TELEGRAM JUALAN PREMIUM + LICENSE SERVER SYSTEM</h1>
+                    <p class="lead mb-4">SCRIPT TERLENGKAP & TERCANGGIH UNTUK BISNIS DIGITAL ANDA!</p>
+                    
+                    <ul class="value-prop list-unstyled mb-5">
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Automasi 24/7 tanpa henti</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Keamanan enterprise grade</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Payment gateway terintegrasi</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Sistem anti-crack canggih</li>
+                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Mudah dikelola dan dikustomisasi</li>
+                    </ul>
+                    
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#harga" class="btn btn-primary btn-lg px-4 py-3">Beli Sekarang</a>
+                        <a href="#demo" class="btn btn-outline-primary btn-lg px-4 py-3">Coba Demo</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-fade-in delay-3">
+                    <!-- Quick Order Codes -->
+                    <div class="card bg-dark border-secondary mt-5 mt-lg-0">
+                        <div class="card-header bg-secondary">
+                            <h5 class="card-title mb-0"><i class="bi bi-lightning-charge-fill me-2"></i>Quick Order Codes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="quick-order-code card bg-dark border-success position-relative">
+                                        <div class="card-body text-center">
+                                            <div class="copied-tooltip">Disalin!</div>
+                                            <h5 class="text-success">/buy net1b</h5>
+                                            <p class="mb-0 text-muted">Netflix 1 Bulan</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="quick-order-code card bg-dark border-info position-relative">
+                                        <div class="card-body text-center">
+                                            <div class="copied-tooltip">Disalin!</div>
+                                            <h5 class="text-info">/buy spo3b</h5>
+                                            <p class="mb-0 text-muted">Spotify 3 Bulan</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="quick-order-code card bg-dark border-warning position-relative">
+                                        <div class="card-body text-center">
+                                            <div class="copied-tooltip">Disalin!</div>
+                                            <h5 class="text-warning">/buy yt1b</h5>
+                                            <p class="mb-0 text-muted">YouTube Premium</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="quick-order-code card bg-dark border-primary position-relative">
+                                        <div class="card-body text-center">
+                                            <div class="copied-tooltip">Disalin!</div>
+                                            <h5 class="text-primary">/buy can1b</h5>
+                                            <p class="mb-0 text-muted">Canva Pro</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Fitur Section -->
+        <section id="fitur" class="section-padding">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Fitur Unggulan</h2>
+                        <p class="lead text-muted">Semua yang Anda butuhkan untuk menjalankan bisnis digital otomatis</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-lightning-charge-fill display-4 text-warning"></i>
+                                </div>
+                                <h4 class="card-title text-center">Sistem Order Super Cepat</h4>
+                                <p class="card-text">Proses order otomatis dalam hitungan detik, bahkan saat lalu lintas tinggi.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-shield-check display-4 text-success"></i>
+                                </div>
+                                <h4 class="card-title text-center">Keamanan Tingkat Bank</h4>
+                                <p class="card-text">Enkripsi end-to-end dan perlindungan data dengan standar keamanan tertinggi.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-credit-card display-4 text-primary"></i>
+                                </div>
+                                <h4 class="card-title text-center">Payment Gateway Terintegrasi</h4>
+                                <p class="card-text">Dukungan Tripay, QRIS, transfer bank, e-wallet, dan pembayaran crypto.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-key display-4 text-info"></i>
+                                </div>
+                                <h4 class="card-title text-center">License Validation Real-time</h4>
+                                <p class="card-text">Validasi lisensi secara real-time dengan sistem anti-abuse yang canggih.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-graph-up display-4 text-warning"></i>
+                                </div>
+                                <h4 class="card-title text-center">Analytics & Reporting Pro</h4>
+                                <p class="card-text">Pantau kinerja bisnis dengan dashboard analytics dan laporan detail.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card bg-dark h-100">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-sliders display-4 text-success"></i>
+                                </div>
+                                <h4 class="card-title text-center">Admin Panel Lengkap</h4>
+                                <p class="card-text">Kelola user, stok, broadcast, refund, dan multi-admin dari satu panel.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keamanan Section -->
+        <section id="keamanan" class="section-padding bg-dark">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Sistem Keamanan Enterprise</h2>
+                        <p class="lead text-muted">Melindungi bisnis dan data Anda dengan teknologi terbaru</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card bg-secondary border-0 h-100 position-relative">
+                            <span class="security-badge badge bg-danger">Anti-Crack</span>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <i class="bi bi-device-ssd me-2"></i>Double Device Binding
+                                </h4>
+                                <p class="card-text">Kombinasi HWID + IP binding untuk mencegah penyalahgunaan lisensi.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-secondary border-0 h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <i class="bi bi-database-shield me-2"></i>Database Terenkripsi
+                                </h4>
+                                <p class="card-text">Semua data sensitif dienkripsi dengan algoritma AES-256.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-secondary border-0 h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <i class="bi bi-shield-slash me-2"></i>Rate Limiting Anti-Spam
+                                </h4>
+                                <p class="card-text">Mencegah serangan brute force dan spam dengan sistem rate limiting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-secondary border-0 h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <i class="bi bi-clipboard-data me-2"></i>Access Logging Lengkap
+                                </h4>
+                                <p class="card-text">Mencatat semua aktivitas akses untuk audit dan pelacakan masalah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <i class="bi bi-input-cursor-text me-2"></i>Input Sanitization & Validation
+                                </h4>
+                                <p class="card-text">Filter dan validasi semua input untuk mencegah serangan injeksi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-5">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <small>Implementasi produksi memerlukan konfigurasi server & audit keamanan tambahan.</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produk Section -->
+        <section id="produk" class="section-padding">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Produk yang Didukung</h2>
+                        <p class="lead text-muted">Cocok untuk berbagai jenis produk digital</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-dark h-100 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
+                                <h4 class="card-title">Streaming</h4>
+                                <ul class="list-unstyled">
+                                    <li>Netflix</li>
+                                    <li>Spotify</li>
+                                    <li>YouTube Premium</li>
+                                    <li>Disney+</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-dark h-100 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-tools display-4 text-success mb-3"></i>
+                                <h4 class="card-title">Productivity Tools</h4>
+                                <ul class="list-unstyled">
+                                    <li>Canva Pro</li>
+                                    <li>Adobe Creative Cloud</li>
+                                    <li>Microsoft Office</li>
+                                    <li>Notion</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-dark h-100 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-controller display-4 text-warning mb-3"></i>
+                                <h4 class="card-title">Gaming</h4>
+                                <ul class="list-unstyled">
+                                    <li>Steam Wallet</li>
+                                    <li>Game Pass</li>
+                                    <li>In-game items</li>
+                                    <li>Gift Cards</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-dark h-100 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-box-seam display-4 text-info mb-3"></i>
+                                <h4 class="card-title">Digital Products</h4>
+                                <ul class="list-unstyled">
+                                    <li>E-books</li>
+                                    <li>Software</li>
+                                    <li>Course</li>
+                                    <li>Membership</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pembayaran Section -->
+        <section id="pembayaran" class="section-padding bg-dark">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Metode Pembayaran</h2>
+                        <p class="lead text-muted">Dukungan berbagai metode pembayaran populer</p>
+                    </div>
+                </div>
+                <div class="row g-4 text-center">
+                    <div class="col-6 col-md-3">
+                        <div class="p-4 bg-secondary rounded">
+                            <i class="bi bi-qr-code display-4 text-success mb-3"></i>
+                            <h5>Tripay/QRIS</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="p-4 bg-secondary rounded">
+                            <i class="bi bi-bank display-4 text-primary mb-3"></i>
+                            <h5>Transfer Bank</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="p-4 bg-secondary rounded">
+                            <i class="bi bi-wallet display-4 text-warning mb-3"></i>
+                            <h5>E-wallet</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="p-4 bg-secondary rounded">
+                            <i class="bi bi-currency-bitcoin display-4 text-orange mb-3"></i>
+                            <h5>Crypto (BTC/USDT)</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section-padding">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Analytics & Reporting</h2>
+                        <p class="lead text-muted">Pantau performa bisnis Anda dengan data real-time</p>
+                    </div>
+                </div>
+                <div class="row g-4 mb-5">
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-center">
+                            <div class="card-body">
+                                <i class="bi bi-currency-dollar display-4 text-success mb-3"></i>
+                                <h3 class="fw-bold" id="profitCounter">0</h3>
+                                <p class="text-muted">Profit Bulanan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-center">
+                            <div class="card-body">
+                                <i class="bi bi-people display-4 text-primary mb-3"></i>
+                                <h3 class="fw-bold" id="userCounter">0</h3>
+                                <p class="text-muted">Total Pengguna</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-center">
+                            <div class="card-body">
+                                <i class="bi bi-cart-check display-4 text-warning mb-3"></i>
+                                <h3 class="fw-bold" id="transactionCounter">0</h3>
+                                <p class="text-muted">Transaksi Hari Ini</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="card bg-dark">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Profit Harian (7 Hari Terakhir)</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas class="mini-chart" id="profitChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-dark">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Distribusi Produk Terlaris</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas class="mini-chart" id="productChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimoni Section -->
+        <section id="testimoni" class="section-padding bg-dark">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Apa Kata Pelanggan?</h2>
+                        <p class="lead text-muted">Testimoni dari pengguna yang sudah merasakan manfaatnya</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card card bg-secondary h-100">
+                            <div class="card-body">
+                                <div class="d-flex mb-4">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-person-circle display-5 text-muted"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">@jakarta</h5>
+                                        <small class="text-muted">Pengguna sejak 2023</small>
+                                    </div>
+                                </div>
+                                <p class="card-text">"Sejak pakai sistem ini, penjualan produk digital saya naik 300%. Support responsif banget!"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card card bg-secondary h-100">
+                            <div class="card-body">
+                                <div class="d-flex mb-4">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-person-circle display-5 text-muted"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">@surabaya</h5>
+                                        <small class="text-muted">Pengguna sejak 2024</small>
+                                    </div>
+                                </div>
+                                <p class="card-text">"Botnya sangat stabil, tidak pernah down bahkan saat traffic tinggi. Sistem keamanannya top notch!"</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mx-auto">
+                        <div class="testimonial-card card bg-secondary h-100">
+                            <div class="card-body">
+                                <div class="d-flex mb-4">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-person-circle display-5 text-muted"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">@bandung</h5>
+                                        <small class="text-muted">Pengguna sejak 2024</small>
+                                    </div>
+                                </div>
+                                <p class="card-text">"Setup mudah, dokumentasi lengkap, dan yang paling penting sistem licensenya sangat aman dari crack."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Harga Section -->
+        <section id="harga" class="section-padding">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Paket & Harga</h2>
+                        <p class="lead text-muted">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="pricing-card card bg-dark h-100">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">BASIC</h4>
+                                <div class="text-center my-4">
+                                    <span class="display-4 fw-bold">Rp 699.000</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Bot + License Server</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Dokumentasi Lengkap</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 30 Hari Support</li>
+                                    <li class="mb-2"><i class="bi bi-x-circle text-muted me-2"></i> Setup Assistance</li>
+                                    <li class="mb-2"><i class="bi bi-x-circle text-muted me-2"></i> Custom Branding</li>
+                                    <li><i class="bi bi-x-circle text-muted me-2"></i> Priority Support</li>
+                                </ul>
+                                <div class="text-center mt-4">
+                                    <a href="#" class="btn btn-outline-primary w-100">Pilih Paket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="pricing-card card bg-dark h-100 recommended">
+                            <div class="card-body">
+                                <span class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">Rekomendasi</span>
+                                <h4 class="card-title text-center">PRO</h4>
+                                <div class="text-center my-4">
+                                    <span class="display-4 fw-bold">Rp 1.299.000</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Semua Fitur Basic</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Setup Assistance</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Custom Branding</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 90 Hari Support</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Basic Customization</li>
+                                    <li><i class="bi bi-x-circle text-muted me-2"></i> Priority Support</li>
+                                </ul>
+                                <div class="text-center mt-4">
+                                    <a href="#" class="btn btn-primary w-100">Pilih Paket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="pricing-card card bg-dark h-100">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">ENTERPRISE</h4>
+                                <div class="text-center my-4">
+                                    <span class="display-4 fw-bold">Rp 2.499.000</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Semua Fitur Pro</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Custom Features</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Priority Support</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Lifetime Updates</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> White Label</li>
+                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dedicated Server Setup</li>
+                                </ul>
+                                <div class="text-center mt-4">
+                                    <a href="#" class="btn btn-outline-primary w-100">Pilih Paket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limited Offer Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="countdown-box text-center text-white">
+                    <h3 class="fw-bold mb-3">PENAWARAN TERBATAS!</h3>
+                    <p class="lead mb-4">Diskon 40% untuk 50 pembeli pertama + Bonus Setup Guide</p>
+                    
+                    <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap" id="countdown">
+                        <div class="countdown-item">
+                            <div class="display-6 fw-bold" id="days">00</div>
+                            <small>Hari</small>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="display-6 fw-bold" id="hours">00</div>
+                            <small>Jam</small>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="display-6 fw-bold" id="minutes">00</div>
+                            <small>Menit</small>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="display-6 fw-bold" id="seconds">00</div>
+                            <small>Detik</small>
+                        </div>
+                    </div>
+                    
+                    <a href="#harga" class="btn btn-warning btn-lg px-5 py-3 fw-bold">DAPATKAN DISKON SEKARANG</a>
+                    
+                    <div class="mt-4">
+                        <div class="badge bg-light text-dark py-2 px-3">
+                            <i class="bi bi-arrow-repeat me-1"></i> 100% Uang Kembali 7 Hari
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section-padding bg-dark">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Pertanyaan Umum</h2>
+                        <p class="lead text-muted">Temukan jawaban atas pertanyaan yang sering diajukan</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                        Apa saja requirement server untuk menjalankan sistem ini?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Minimum requirement: PHP 8.1, MySQL 5.7 atau MariaDB 10.3, Web Server (Apache/Nginx). Rekomendasi: PHP 8.2, MySQL 8.0, setidaknya 2GB RAM, dan SSD storage untuk performa optimal.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                        Berapa lama proses setup setelah pembelian?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Untuk paket Basic, Anda bisa melakukan setup sendiri menggunakan dokumentasi yang disediakan (1-2 jam). Paket Pro dan Enterprise termasuk bantuan setup dari tim kami (maksimal 24 jam setelah pembayaran dikonfirmasi).
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                        Apakah sistem ini aman dari crack dan pembajakan?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Ya, kami menggunakan sistem keamanan multi-layer termasuk double device binding (HWID + IP), encryption database, rate limiting, dan real-time license validation. Namun, implementasi produksi memerlukan konfigurasi server dan audit keamanan tambahan.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                        Bagaimana proses refund/garansi uang kembali?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Kami menawarkan garansi 7 hari uang kembali jika sistem tidak bekerja seperti yang dijelaskan. Untuk mengklaim garansi, silakan hubungi kami melalui Telegram dengan menyertakan bukti pembayaran dan penjelasan detail mengenai kendala yang dihadapi.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                        Apakah saya mendapatkan update setelah pembelian?
+                                    </button>
+                                </h2>
+                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Untuk paket Basic dan Pro, Anda mendapatkan update selama 30 dan 90 hari respectively. Paket Enterprise mendapatkan lifetime update. Update termasuk perbaikan bug, peningkatan keamanan, dan penambahan fitur minor.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-secondary border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                                        Bagaimana cara menghubungi support jika ada masalah?
+                                    </button>
+                                </h2>
+                                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Support tersedia melalui Telegram selama jam kerja (09.00 - 18.00 WIB). Response time untuk paket Basic maksimal 24 jam, Pro maksimal 12 jam, dan Enterprise maksimal 2 jam. Pastikan Anda sudah membaca dokumentasi sebelum menghubungi support.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section id="kontak" class="section-padding">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="fw-bold mb-3">Hubungi Kami</h2>
+                        <p class="lead text-muted">Butuh bantuan atau memiliki pertanyaan? Silakan hubungi kami</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="card bg-dark h-100">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Kontak Info</h4>
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-telegram display-6 text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">Telegram</h5>
+                                        <a href="https://t.me/yourusername" class="text-muted">@yourusername</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-whatsapp display-6 text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">WhatsApp</h5>
+                                        <a href="https://wa.me/620000000000" class="text-muted">+62xxx-xxxx-xxxx</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <i class="bi bi-globe display-6 text-info"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-0">Website</h5>
+                                        <a href="https://yourwebsite.com" class="text-muted">yourwebsite.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card bg-dark">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Kirim Pesan</h4>
+                                <form id="contactForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="name" class="form-label">Nama Lengkap</label>
+                                            <input type="text" class="form-control bg-secondary border-0 text-white" id="name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control bg-secondary border-0 text-white" id="email" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="message" class="form-label">Pesan</label>
+                                            <textarea class="form-control bg-secondary border-0 text-white" id="message" rows="5" required></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary px-4 py-2">Kirim Pesan</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <span class="text-muted">&copy; 2024 Bot License System. All rights reserved.</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch me-3">
+                        <input class="form-check-input" type="checkbox" id="footerThemeToggle">
+                        <label class="form-check-label text-muted" for="footerThemeToggle">Mode Terang</label>
+                    </div>
+                    <div>
+                        <a href="#" class="text-muted me-3">Terms of Service</a>
+                        <a href="#" class="text-muted">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <small class="text-muted">Created with <i class="bi bi-heart-fill text-danger"></i> by Ramdan</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action">
+        <div class="floating-buttons">
+            <a href="https://wa.me/620000000000" class="btn btn-success" aria-label="Hubungi via WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="https://t.me/yourusername" class="btn btn-primary" aria-label="Hubungi via Telegram">
+                <i class="bi bi-telegram"></i>
+            </a>
+            <button class="btn btn-secondary" id="floatingThemeToggle" aria-label="Toggle tema">
+                <i class="bi bi-palette"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // === Toggle Theme ===
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference or respect OS preference
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            setTheme(savedTheme);
+            
+            // Set up theme toggles
+            const themeToggles = document.querySelectorAll('#themeToggle, #footerThemeToggle, #floatingThemeToggle');
+            themeToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                    setTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            });
+            
+            // Set the toggle state based on current theme
+            function updateToggleState() {
+                const isLightMode = document.body.classList.contains('light-mode');
+                themeToggles.forEach(toggle => {
+                    if (toggle.type === 'checkbox') {
+                        toggle.checked = isLightMode;
+                    }
+                });
+            }
+            
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+                updateToggleState();
+            }
+            
+            // === Navbar Shrink on Scroll ===
+            const navbar = document.getElementById('mainNav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('shrink');
+                } else {
+                    navbar.classList.remove('shrink');
+                }
+            });
+            
+            // === Smooth Scroll for Navigation Links ===
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // === Countdown Timer ===
+            // Set the target date (easily editable)
+            const targetDate = new Date('2024-12-31T23:59:59').getTime();
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = '<div class="display-6">Penawaran telah berakhir!</div>';
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
+            
+            // === Animated Counters ===
+            function animateCounter(elementId, target, duration = 2000) {
+                const element = document.getElementById(elementId);
+                const start = 0;
+                const increment = target / (duration / 16); // 60fps
+                let current = start;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 16);
+            }
+            
+            // Initialize counters when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter('profitCounter', 12450000);
+                        animateCounter('userCounter', 3250);
+                        animateCounter('transactionCounter', 48);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const analyticsSection = document.getElementById('analytics');
+            if (analyticsSection) {
+                observer.observe(analyticsSection);
+            }
+            
+            // === Simple Chart Mockups ===
+            function initCharts() {
+                // Profit Chart
+                const profitCtx = document.getElementById('profitChart').getContext('2d');
+                
+                // Create gradient
+                const profitGradient = profitCtx.createLinearGradient(0, 0, 0, 200);
+                profitGradient.addColorStop(0, 'rgba(108, 92, 231, 0.6)');
+                profitGradient.addColorStop(1, 'rgba(108, 92, 231, 0.1)');
+                
+                // Draw chart
+                profitCtx.beginPath();
+                profitCtx.moveTo(0, 200);
+                
+                // Simulated data points
+                const profitData = [120, 150, 180, 200, 170, 210, 190];
+                const maxProfit = Math.max(...profitData);
+                
+                profitData.forEach((value, index) => {
+                    const x = (index / (profitData.length - 1)) * 400;
+                    const y = 200 - (value / maxProfit) * 180;
+                    profitCtx.lineTo(x, y);
+                });
+                
+                profitCtx.lineTo(400, 200);
+                profitCtx.closePath();
+                profitCtx.fillStyle = profitGradient;
+                profitCtx.fill();
+                
+                profitCtx.strokeStyle = '#6c5ce7';
+                profitCtx.lineWidth = 2;
+                profitCtx.stroke();
+                
+                // Product Chart
+                const productCtx = document.getElementById('productChart').getContext('2d');
+                const productData = [35, 25, 20, 15, 5]; // percentages
+                const productColors = ['#6c5ce7', '#00b894', '#fdcb6e', '#d63031', '#0984e3'];
+                
+                let startAngle = 0;
+                productData.forEach((value, index) => {
+                    const sliceAngle = (value / 100) * 2 * Math.PI;
+                    
+                    productCtx.beginPath();
+                    productCtx.moveTo(200, 100);
+                    productCtx.arc(200, 100, 80, startAngle, startAngle + sliceAngle);
+                    productCtx.closePath();
+                    
+                    productCtx.fillStyle = productColors[index];
+                    productCtx.fill();
+                    
+                    startAngle += sliceAngle;
+                });
+                
+                // Add center circle
+                productCtx.beginPath();
+                productCtx.arc(200, 100, 30, 0, 2 * Math.PI);
+                productCtx.fillStyle = '#181b20';
+                productCtx.fill();
+            }
+            
+            // Initialize charts when they come into view
+            const chartObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initCharts();
+                        chartObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const chartsSection = document.querySelector('.chart-container');
+            if (chartsSection) {
+                chartObserver.observe(chartsSection);
+            }
+            
+            // === Quick Order Code Copy Functionality ===
+            document.querySelectorAll('.quick-order-code').forEach(codeElement => {
+                codeElement.addEventListener('click', function() {
+                    const code = this.querySelector('h5').textContent;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const tooltip = this.querySelector('.copied-tooltip');
+                        tooltip.classList.add('show');
+                        setTimeout(() => {
+                            tooltip.classList.remove('show');
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // === Contact Form Validation ===
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple validation
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    if (!name || !email || !message) {
+                        alert('Harap isi semua field yang diperlukan.');
+                        return;
+                    }
+                    
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        alert('Harap masukkan alamat email yang valid.');
+                        return;
+                    }
+                    
+                    // In a real application, you would send the form data to a server here
+                    alert('Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Initialize animations for elements
+            const animatedElements = document.querySelectorAll('.animate-fade-in');
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+            });
+            
+            // Animate on scroll
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease forwards';
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
