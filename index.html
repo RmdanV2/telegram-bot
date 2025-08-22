@@ -6,202 +6,139 @@
     <title>Bot Telegram Jualan Premium + License Server System</title>
     
     <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
         :root {
-            --bg-dark-primary: #0f1115;
-            --bg-dark-secondary: #181b20;
-            --text-dark-primary: #f8f9fa;
-            --text-dark-secondary: #e9ecef;
-            --accent-color: #6c5ce7;
-            --accent-hover: #5d4fd6;
-            --success-color: #00b894;
-            --warning-color: #fdcb6e;
-            --danger-color: #d63031;
+            --primary: #0d6efd;
+            --secondary-light: #f8f9fa;
+            --secondary-medium: #e9ecef;
+            --dark: #212529;
             --transition: all 0.3s ease;
-        }
-        
-        [data-theme="light"] {
-            --bg-light-primary: #ffffff;
-            --bg-light-secondary: #f8f9fa;
-            --text-light-primary: #212529;
-            --text-light-secondary: #495057;
         }
         
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-dark-primary);
-            color: var(--text-dark-primary);
+            color: var(--dark);
+            background-color: white;
             transition: var(--transition);
         }
         
-        body.light-mode {
-            background-color: var(--bg-light-primary);
-            color: var(--text-light-primary);
+        body.dark-mode {
+            background-color: #121212;
+            color: #f8f9fa;
         }
         
-        .light-mode .bg-dark {
-            background-color: var(--bg-light-secondary) !important;
-            color: var(--text-light-primary) !important;
+        .dark-mode .bg-light {
+            background-color: #2d2d2d !important;
         }
         
-        .light-mode .card {
-            background-color: var(--bg-light-secondary);
-            color: var(--text-light-primary);
-            border-color: #dee2e6;
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            border-color: #444;
         }
         
-        .light-mode .text-white {
-            color: var(--text-light-primary) !important;
-        }
-        
-        .light-mode .text-muted {
-            color: #6c757d !important;
-        }
-        
-        .navbar {
-            padding: 1rem 0;
-            transition: var(--transition);
-            background-color: rgba(15, 17, 21, 0.95) !important;
-            backdrop-filter: blur(10px);
-        }
-        
-        .light-mode .navbar {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-        }
-        
-        .navbar.shrink {
-            padding: 0.5rem 0;
+        .dark-mode .form-control {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #f8f9fa;
         }
         
         .section-padding {
-            padding-top: 5rem;
-            padding-bottom: 5rem;
+            padding: 5rem 0;
         }
         
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(to bottom right, var(--bg-dark-primary), var(--bg-dark-secondary));
-        }
-        
-        .light-mode .hero-section {
-            background: linear-gradient(to bottom right, var(--bg-light-primary), var(--bg-light-secondary));
-        }
-        
-        .value-prop li {
-            margin-bottom: 0.5rem;
+        .navbar {
             transition: var(--transition);
+            padding: 1.5rem 1rem;
         }
         
-        .value-prop li:hover {
-            transform: translateX(5px);
+        .navbar-shrink {
+            padding: 0.5rem 1rem;
         }
         
-        .btn-primary {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
-        }
-        
-        .btn-outline-primary {
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--accent-color);
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0a58ca 100%);
             color: white;
+            padding: 7rem 0;
+        }
+        
+        .terminal {
+            background-color: var(--dark);
+            color: #20c997;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .terminal-input {
+            background-color: transparent;
+            border: none;
+            color: #20c997;
+            width: calc(100% - 150px);
+            outline: none;
         }
         
         .feature-card {
-            transition: var(--transition);
+            transition: transform 0.3s ease;
             height: 100%;
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .light-mode .feature-card:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .security-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.5rem;
         }
         
         .pricing-card {
             transition: var(--transition);
+            border: 2px solid transparent;
         }
         
-        .pricing-card:hover {
+        .pricing-card.featured {
+            border-color: var(--primary);
             transform: scale(1.03);
         }
         
-        .recommended {
-            border: 2px solid var(--accent-color);
-            position: relative;
+        .pricing-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         }
         
         .countdown-box {
-            background: linear-gradient(45deg, var(--accent-color), var(--danger-color));
-            padding: 2rem;
-            border-radius: 10px;
-        }
-        
-        .countdown-item {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
             padding: 0.5rem;
-            min-width: 70px;
+            min-width: 60px;
+            text-align: center;
         }
         
-        .floating-action {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
         }
         
-        .floating-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
         }
         
-        .floating-buttons .btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .dark-mode .btn-outline-primary {
+            color: #6ea8fe;
+            border-color: #6ea8fe;
         }
         
-        .chart-container {
-            height: 200px;
-            position: relative;
+        .dark-mode .btn-outline-primary:hover {
+            background-color: #6ea8fe;
+            color: var(--dark);
         }
         
-        .mini-chart {
-            width: 100%;
-            height: 100%;
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary);
+            color: white;
         }
         
         .testimonial-card {
@@ -209,966 +146,861 @@
         }
         
         .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .quick-order-code {
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .quick-order-code:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         }
         
-        .copied-tooltip {
-            position: absolute;
-            background-color: var(--success-color);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .copied-tooltip.show {
-            opacity: 1;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-        
-        /* Accessibility improvements */
-        a:focus, button:focus, .form-control:focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-        
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            .btn {
-                border-width: 2px;
-            }
-        }
-        
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        .chart-container {
+            height: 250px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#beranda">
-                <i class="bi bi-robot me-2"></i>BOT LICENSE SYSTEM
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-robot me-2"></i>BOT TELEGRAM JUALAN PREMIUM + LICENSE SERVER SYSTEM
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#fitur">Fitur</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#keamanan">Keamanan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pembayaran">Pembayaran</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#analytics">Analytics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#harga">Paket & Harga</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary btn-sm mt-1" id="themeToggle">
+                            <i class="bi bi-moon-fill"></i> Mode Gelap
+                        </button>
+                    </li>
                 </ul>
-                <div class="ms-3">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="themeToggle">
-                        <label class="form-check-label" for="themeToggle">
-                            <i class="bi bi-sun-fill"></i>
-                        </label>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-section" id="beranda">
+    <header class="hero">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 animate-fade-in">
-                    <h1 class="display-4 fw-bold mb-3">BOT TELEGRAM JUALAN PREMIUM + LICENSE SERVER SYSTEM</h1>
-                    <p class="lead mb-4">SCRIPT TERLENGKAP & TERCANGGIH UNTUK BISNIS DIGITAL ANDA!</p>
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-3">Tingkatkan Penjualan Digital Anda dengan Bot Telegram</h1>
+                    <p class="lead mb-4">Sistem otomatis untuk menjual produk digital dengan license key management yang aman dan terintegrasi.</p>
                     
-                    <ul class="value-prop list-unstyled mb-5">
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Automasi 24/7 tanpa henti</li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Keamanan enterprise grade</li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Payment gateway terintegrasi</li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Sistem anti-crack canggih</li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i> Mudah dikelola dan dikustomisasi</li>
+                    <ul class="list-unstyled mb-5">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i> Otomatisasi penjualan 24/7</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i> Sistem license key yang aman</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i> Integrasi pembayaran lengkap</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i> Laporan penjualan real-time</li>
                     </ul>
                     
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="#harga" class="btn btn-primary btn-lg px-4 py-3">Beli Sekarang</a>
-                        <a href="#demo" class="btn btn-outline-primary btn-lg px-4 py-3">Coba Demo</a>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#harga" class="btn btn-light btn-lg px-4">Beli Sekarang</a>
+                        <a href="#demo" class="btn btn-outline-light btn-lg px-4">Coba Demo</a>
                     </div>
                 </div>
-                <div class="col-lg-6 animate-fade-in delay-3">
-                    <!-- Quick Order Codes -->
-                    <div class="card bg-dark border-secondary mt-5 mt-lg-0">
-                        <div class="card-header bg-secondary">
-                            <h5 class="card-title mb-0"><i class="bi bi-lightning-charge-fill me-2"></i>Quick Order Codes</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="quick-order-code card bg-dark border-success position-relative">
-                                        <div class="card-body text-center">
-                                            <div class="copied-tooltip">Disalin!</div>
-                                            <h5 class="text-success">/buy net1b</h5>
-                                            <p class="mb-0 text-muted">Netflix 1 Bulan</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="quick-order-code card bg-dark border-info position-relative">
-                                        <div class="card-body text-center">
-                                            <div class="copied-tooltip">Disalin!</div>
-                                            <h5 class="text-info">/buy spo3b</h5>
-                                            <p class="mb-0 text-muted">Spotify 3 Bulan</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="quick-order-code card bg-dark border-warning position-relative">
-                                        <div class="card-body text-center">
-                                            <div class="copied-tooltip">Disalin!</div>
-                                            <h5 class="text-warning">/buy yt1b</h5>
-                                            <p class="mb-0 text-muted">YouTube Premium</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="quick-order-code card bg-dark border-primary position-relative">
-                                        <div class="card-body text-center">
-                                            <div class="copied-tooltip">Disalin!</div>
-                                            <h5 class="text-primary">/buy can1b</h5>
-                                            <p class="mb-0 text-muted">Canva Pro</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-6 d-none d-lg-block text-center">
+                    <i class="bi bi-robot" style="font-size: 15rem;"></i>
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
-        <!-- Fitur Section -->
-        <section id="fitur" class="section-padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Fitur Unggulan</h2>
-                        <p class="lead text-muted">Semua yang Anda butuhkan untuk menjalankan bisnis digital otomatis</p>
+    <!-- Quick Order Codes -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="fw-bold mb-3">Quick Order Codes</h2>
+                    <p class="text-muted">Gunakan perintah berikut untuk membeli produk secara langsung melalui bot Telegram</p>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">NET 1 Bulan</h5>
+                            <code>/buy net1b</code>
+                            <p class="text-muted mt-2 small">Rp 25.000</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-lightning-charge-fill display-4 text-warning"></i>
-                                </div>
-                                <h4 class="card-title text-center">Sistem Order Super Cepat</h4>
-                                <p class="card-text">Proses order otomatis dalam hitungan detik, bahkan saat lalu lintas tinggi.</p>
-                            </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Spotify 3 Bulan</h5>
+                            <code>/buy spo3b</code>
+                            <p class="text-muted mt-2 small">Rp 35.000</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-shield-check display-4 text-success"></i>
-                                </div>
-                                <h4 class="card-title text-center">Keamanan Tingkat Bank</h4>
-                                <p class="card-text">Enkripsi end-to-end dan perlindungan data dengan standar keamanan tertinggi.</p>
-                            </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">YouTube Premium 1 Bulan</h5>
+                            <code>/buy yt1b</code>
+                            <p class="text-muted mt-2 small">Rp 30.000</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-credit-card display-4 text-primary"></i>
-                                </div>
-                                <h4 class="card-title text-center">Payment Gateway Terintegrasi</h4>
-                                <p class="card-text">Dukungan Tripay, QRIS, transfer bank, e-wallet, dan pembayaran crypto.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-key display-4 text-info"></i>
-                                </div>
-                                <h4 class="card-title text-center">License Validation Real-time</h4>
-                                <p class="card-text">Validasi lisensi secara real-time dengan sistem anti-abuse yang canggih.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-graph-up display-4 text-warning"></i>
-                                </div>
-                                <h4 class="card-title text-center">Analytics & Reporting Pro</h4>
-                                <p class="card-text">Pantau kinerja bisnis dengan dashboard analytics dan laporan detail.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="feature-card card bg-dark h-100">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-sliders display-4 text-success"></i>
-                                </div>
-                                <h4 class="card-title text-center">Admin Panel Lengkap</h4>
-                                <p class="card-text">Kelola user, stok, broadcast, refund, dan multi-admin dari satu panel.</p>
-                            </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Canva Pro 1 Bulan</h5>
+                            <code>/buy can1b</code>
+                            <p class="text-muted mt-2 small">Rp 40.000</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Keamanan Section -->
-        <section id="keamanan" class="section-padding bg-dark">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Sistem Keamanan Enterprise</h2>
-                        <p class="lead text-muted">Melindungi bisnis dan data Anda dengan teknologi terbaru</p>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card bg-secondary border-0 h-100 position-relative">
-                            <span class="security-badge badge bg-danger">Anti-Crack</span>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="bi bi-device-ssd me-2"></i>Double Device Binding
-                                </h4>
-                                <p class="card-text">Kombinasi HWID + IP binding untuk mencegah penyalahgunaan lisensi.</p>
-                            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h4 class="text-center mb-3">Simulasi Terminal</h4>
+                    <div class="terminal mb-3">
+                        <div id="terminal-output">
+                            <div>Bot: Selamat datang! Ketik /buy [kode produk] untuk membeli.</div>
+                            <div>Bot: Contoh: /buy net1b</div>
+                        </div>
+                        <div class="d-flex align-items-center mt-2">
+                            <span class="text-success me-2">$</span>
+                            <input type="text" class="terminal-input" id="terminal-input" placeholder="Ketik perintah di sini..." autocomplete="off">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card bg-secondary border-0 h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="bi bi-database-shield me-2"></i>Database Terenkripsi
-                                </h4>
-                                <p class="card-text">Semua data sensitif dienkripsi dengan algoritma AES-256.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card bg-secondary border-0 h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="bi bi-shield-slash me-2"></i>Rate Limiting Anti-Spam
-                                </h4>
-                                <p class="card-text">Mencegah serangan brute force dan spam dengan sistem rate limiting.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card bg-secondary border-0 h-100">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="bi bi-clipboard-data me-2"></i>Access Logging Lengkap
-                                </h4>
-                                <p class="card-text">Mencatat semua aktivitas akses untuk audit dan pelacakan masalah.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card bg-secondary border-0">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="bi bi-input-cursor-text me-2"></i>Input Sanitization & Validation
-                                </h4>
-                                <p class="card-text">Filter dan validasi semua input untuk mencegah serangan injeksi.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="alert alert-info mt-5">
-                    <i class="bi bi-info-circle me-2"></i>
-                    <small>Implementasi produksi memerlukan konfigurasi server & audit keamanan tambahan.</small>
+                    <p class="text-muted text-center small">Gunakan perintah seperti /buy net1b untuk mensimulasikan pembelian</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Produk Section -->
-        <section id="produk" class="section-padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Produk yang Didukung</h2>
-                        <p class="lead text-muted">Cocok untuk berbagai jenis produk digital</p>
+    <!-- Fitur Unggulan -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Fitur Unggulan</h2>
+                    <p class="text-muted">Semua yang Anda butuhkan untuk menjalankan bisnis digital otomatis</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-cart-check-fill display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Penjualan Otomatis</h5>
+                            <p class="card-text">Bot bekerja 24/7 melayani pembeli tanpa henti, bahkan saat Anda tidur.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card bg-dark h-100 text-center">
-                            <div class="card-body">
-                                <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
-                                <h4 class="card-title">Streaming</h4>
-                                <ul class="list-unstyled">
-                                    <li>Netflix</li>
-                                    <li>Spotify</li>
-                                    <li>YouTube Premium</li>
-                                    <li>Disney+</li>
-                                </ul>
-                            </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-key-fill display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">License Management</h5>
+                            <p class="card-text">Generate dan kelola license key dengan mudah. Batas masa aktif sesuai paket.</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card bg-dark h-100 text-center">
-                            <div class="card-body">
-                                <i class="bi bi-tools display-4 text-success mb-3"></i>
-                                <h4 class="card-title">Productivity Tools</h4>
-                                <ul class="list-unstyled">
-                                    <li>Canva Pro</li>
-                                    <li>Adobe Creative Cloud</li>
-                                    <li>Microsoft Office</li>
-                                    <li>Notion</li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-lock-fill display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Sistem Keamanan</h5>
+                            <p class="card-text">Proteksi terhadap crack dan pembajakan dengan sistem verifikasi canggih.</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card bg-dark h-100 text-center">
-                            <div class="card-body">
-                                <i class="bi bi-controller display-4 text-warning mb-3"></i>
-                                <h4 class="card-title">Gaming</h4>
-                                <ul class="list-unstyled">
-                                    <li>Steam Wallet</li>
-                                    <li>Game Pass</li>
-                                    <li>In-game items</li>
-                                    <li>Gift Cards</li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-credit-card-fill display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Multi Payment</h5>
+                            <p class="card-text">Dukungan berbagai metode pembayaran: transfer bank, e-wallet, hingga crypto.</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card bg-dark h-100 text-center">
-                            <div class="card-body">
-                                <i class="bi bi-box-seam display-4 text-info mb-3"></i>
-                                <h4 class="card-title">Digital Products</h4>
-                                <ul class="list-unstyled">
-                                    <li>E-books</li>
-                                    <li>Software</li>
-                                    <li>Course</li>
-                                    <li>Membership</li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-graph-up-arrow display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Analytics & Report</h5>
+                            <p class="card-text">Pantau penjualan, pendapatan, dan performa produk dengan dashboard lengkap.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-headset display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Support 24/7</h5>
+                            <p class="card-text">Tim support siap membantu kapan saja melalui Telegram dengan respon cepat.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Pembayaran Section -->
-        <section id="pembayaran" class="section-padding bg-dark">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Metode Pembayaran</h2>
-                        <p class="lead text-muted">Dukungan berbagai metode pembayaran populer</p>
-                    </div>
-                </div>
-                <div class="row g-4 text-center">
-                    <div class="col-6 col-md-3">
-                        <div class="p-4 bg-secondary rounded">
-                            <i class="bi bi-qr-code display-4 text-success mb-3"></i>
-                            <h5>Tripay/QRIS</h5>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="p-4 bg-secondary rounded">
-                            <i class="bi bi-bank display-4 text-primary mb-3"></i>
-                            <h5>Transfer Bank</h5>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="p-4 bg-secondary rounded">
-                            <i class="bi bi-wallet display-4 text-warning mb-3"></i>
-                            <h5>E-wallet</h5>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="p-4 bg-secondary rounded">
-                            <i class="bi bi-currency-bitcoin display-4 text-orange mb-3"></i>
-                            <h5>Crypto (BTC/USDT)</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Analytics Section -->
-        <section id="analytics" class="section-padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Analytics & Reporting</h2>
-                        <p class="lead text-muted">Pantau performa bisnis Anda dengan data real-time</p>
-                    </div>
-                </div>
-                <div class="row g-4 mb-5">
-                    <div class="col-md-4">
-                        <div class="card bg-dark text-center">
-                            <div class="card-body">
-                                <i class="bi bi-currency-dollar display-4 text-success mb-3"></i>
-                                <h3 class="fw-bold" id="profitCounter">0</h3>
-                                <p class="text-muted">Profit Bulanan</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card bg-dark text-center">
-                            <div class="card-body">
-                                <i class="bi bi-people display-4 text-primary mb-3"></i>
-                                <h3 class="fw-bold" id="userCounter">0</h3>
-                                <p class="text-muted">Total Pengguna</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card bg-dark text-center">
-                            <div class="card-body">
-                                <i class="bi bi-cart-check display-4 text-warning mb-3"></i>
-                                <h3 class="fw-bold" id="transactionCounter">0</h3>
-                                <p class="text-muted">Transaksi Hari Ini</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="card bg-dark">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Profit Harian (7 Hari Terakhir)</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas class="mini-chart" id="profitChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card bg-dark">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Distribusi Produk Terlaris</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas class="mini-chart" id="productChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimoni Section -->
-        <section id="testimoni" class="section-padding bg-dark">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Apa Kata Pelanggan?</h2>
-                        <p class="lead text-muted">Testimoni dari pengguna yang sudah merasakan manfaatnya</p>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card card bg-secondary h-100">
-                            <div class="card-body">
-                                <div class="d-flex mb-4">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-person-circle display-5 text-muted"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">@jakarta</h5>
-                                        <small class="text-muted">Pengguna sejak 2023</small>
-                                    </div>
-                                </div>
-                                <p class="card-text">"Sejak pakai sistem ini, penjualan produk digital saya naik 300%. Support responsif banget!"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card card bg-secondary h-100">
-                            <div class="card-body">
-                                <div class="d-flex mb-4">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-person-circle display-5 text-muted"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">@surabaya</h5>
-                                        <small class="text-muted">Pengguna sejak 2024</small>
-                                    </div>
-                                </div>
-                                <p class="card-text">"Botnya sangat stabil, tidak pernah down bahkan saat traffic tinggi. Sistem keamanannya top notch!"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mx-auto">
-                        <div class="testimonial-card card bg-secondary h-100">
-                            <div class="card-body">
-                                <div class="d-flex mb-4">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-person-circle display-5 text-muted"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">@bandung</h5>
-                                        <small class="text-muted">Pengguna sejak 2024</small>
-                                    </div>
-                                </div>
-                                <p class="card-text">"Setup mudah, dokumentasi lengkap, dan yang paling penting sistem licensenya sangat aman dari crack."</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Harga Section -->
-        <section id="harga" class="section-padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Paket & Harga</h2>
-                        <p class="lead text-muted">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="pricing-card card bg-dark h-100">
-                            <div class="card-body">
-                                <h4 class="card-title text-center">BASIC</h4>
-                                <div class="text-center my-4">
-                                    <span class="display-4 fw-bold">Rp 699.000</span>
-                                </div>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Bot + License Server</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Dokumentasi Lengkap</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 30 Hari Support</li>
-                                    <li class="mb-2"><i class="bi bi-x-circle text-muted me-2"></i> Setup Assistance</li>
-                                    <li class="mb-2"><i class="bi bi-x-circle text-muted me-2"></i> Custom Branding</li>
-                                    <li><i class="bi bi-x-circle text-muted me-2"></i> Priority Support</li>
-                                </ul>
-                                <div class="text-center mt-4">
-                                    <a href="#" class="btn btn-outline-primary w-100">Pilih Paket</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="pricing-card card bg-dark h-100 recommended">
-                            <div class="card-body">
-                                <span class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">Rekomendasi</span>
-                                <h4 class="card-title text-center">PRO</h4>
-                                <div class="text-center my-4">
-                                    <span class="display-4 fw-bold">Rp 1.299.000</span>
-                                </div>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Semua Fitur Basic</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Setup Assistance</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Custom Branding</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 90 Hari Support</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Basic Customization</li>
-                                    <li><i class="bi bi-x-circle text-muted me-2"></i> Priority Support</li>
-                                </ul>
-                                <div class="text-center mt-4">
-                                    <a href="#" class="btn btn-primary w-100">Pilih Paket</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="pricing-card card bg-dark h-100">
-                            <div class="card-body">
-                                <h4 class="card-title text-center">ENTERPRISE</h4>
-                                <div class="text-center my-4">
-                                    <span class="display-4 fw-bold">Rp 2.499.000</span>
-                                </div>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Semua Fitur Pro</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Custom Features</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Priority Support</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Lifetime Updates</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> White Label</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dedicated Server Setup</li>
-                                </ul>
-                                <div class="text-center mt-4">
-                                    <a href="#" class="btn btn-outline-primary w-100">Pilih Paket</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Limited Offer Section -->
-        <section class="py-5">
-            <div class="container">
-                <div class="countdown-box text-center text-white">
-                    <h3 class="fw-bold mb-3">PENAWARAN TERBATAS!</h3>
-                    <p class="lead mb-4">Diskon 40% untuk 50 pembeli pertama + Bonus Setup Guide</p>
+    <!-- Keamanan -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <span class="badge bg-danger mb-3">Anti-Crack</span>
+                    <h2 class="fw-bold mb-4">Sistem Keamanan Terbaik di Kelasnya</h2>
+                    <p class="mb-4">Kami menggunakan teknologi enkripsi mutakhir untuk melindungi produk dan license key dari pembajakan.</p>
                     
-                    <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap" id="countdown">
-                        <div class="countdown-item">
-                            <div class="display-6 fw-bold" id="days">00</div>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> License key terenkripsi dengan algoritma AES-256</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> Sistem verifikasi dua langkah untuk setiap license</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> Deteksi dan blokir otomatis penggunaan crack</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i> Backup database harian untuk mencegah kehilangan data</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="bi bi-shield-check display-1 text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk Cocok -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Cocok Untuk Berbagai Produk Digital</h2>
+                    <p class="text-muted">Jual berbagai jenis produk digital dengan sistem license key yang aman</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-wifi display-5 text-primary mb-3"></i>
+                            <h5 class="card-title">Akun Premium</h5>
+                            <p class="card-text small">Netflix, Spotify, YouTube Premium, dll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-window-stack display-5 text-primary mb-3"></i>
+                            <h5 class="card-title">Software</h5>
+                            <p class="card-text small">Windows, Adobe, Antivirus, dll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-controller display-5 text-primary mb-3"></i>
+                            <h5 class="card-title">Game</h5>
+                            <p class="card-text small">Steam, Minecraft, Mobile Legends, dll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-book display-5 text-primary mb-3"></i>
+                            <h5 class="card-title">E-book & Course</h5>
+                            <p class="card-text small">Buku digital, kursus online, dll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Metode Pembayaran</h2>
+                    <p class="text-muted">Dukungan berbagai metode pembayaran untuk kemudahan transaksi</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4 text-center">
+                    <i class="bi bi-qr-code display-4 text-primary mb-3"></i>
+                    <h5>QRIS</h5>
+                    <p class="small">Pembayaran mudah scan QRIS</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4 text-center">
+                    <i class="bi bi-bank display-4 text-primary mb-3"></i>
+                    <h5>Transfer Bank</h5>
+                    <p class="small">BCA, BNI, BRI, Mandiri, dll.</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4 text-center">
+                    <i class="bi bi-wallet2 display-4 text-primary mb-3"></i>
+                    <h5>E-Wallet</h5>
+                    <p class="small">Gopay, OVO, Dana, LinkAja</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4 text-center">
+                    <i class="bi bi-currency-bitcoin display-4 text-primary mb-3"></i>
+                    <h5>Crypto</h5>
+                    <p class="small">Bitcoin, Ethereum, USDT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Analytics & Laporan</h2>
+                    <p class="text-muted">Pantau perkembangan bisnis Anda dengan data real-time</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-3 col-6 text-center">
+                    <h3 class="text-primary fw-bold">1,250+</h3>
+                    <p>Penjualan Bulanan</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3 class="text-primary fw-bold">98%</h3>
+                    <p>Kepuasan Pelanggan</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3 class="text-primary fw-bold">12 jam</h3>
+                    <p>Rata-rata Response Time</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <h3 class="text-primary fw-bold">99.9%</h3>
+                    <p>Uptime Server</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Apa Kata Pengguna?</h2>
+                    <p class="text-muted">Testimoni dari pengguna yang sudah merasakan manfaat sistem kami</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card testimonial-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-4">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <p class="card-text">"Sejak pakai sistem ini, penjualan akun Netflix saya meningkat 200%. Bot bekerja otomatis 24 jam, jadi saya bisa fokus ke promosi."</p>
+                            <div class="d-flex align-items-center mt-4">
+                                <div>
+                                    <h6 class="mb-0">Ahmad Rizki</h6>
+                                    <small class="text-muted">Seller Netflix Premium</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card testimonial-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-4">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <p class="card-text">"Sistem license key-nya sangat aman. Sudah 6 bulan tidak ada yang komplain soal pembajakan. Supportnya juga responsif banget!"</p>
+                            <div class="d-flex align-items-center mt-4">
+                                <div>
+                                    <h6 class="mb-0">Sari Dewi</h6>
+                                    <small class="text-muted">Seller Software Premium</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card testimonial-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex mb-4">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <p class="card-text">"Multi payment gateway-nya sangat membantu. Customer bisa bayar dengan berbagai metode. Tidak ada lagi komplain susah bayar."</p>
+                            <div class="d-flex align-items-center mt-4">
+                                <div>
+                                    <h6 class="mb-0">Budi Santoso</h6>
+                                    <small class="text-muted">Seller Game Accounts</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paket & Harga -->
+    <section class="section-padding" id="harga">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Paket & Harga</h2>
+                    <p class="text-muted">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card pricing-card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Basic</h5>
+                            <h3 class="fw-bold my-4">Rp 499.000</h3>
+                            <p class="text-muted">Cocok untuk pemula</p>
+                            <ul class="list-unstyled my-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 1 Bot Telegram</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 500 License Key/Bulan</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 3 Produk</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Support via Email</li>
+                                <li class="mb-2"><i class="bi bi-x text-muted me-2"></i> <span class="text-muted">Anti-Crack System</span></li>
+                                <li class="mb-2"><i class="bi bi-x text-muted me-2"></i> <span class="text-muted">Priority Support</span></li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary">Pilih Paket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card pricing-card featured h-100">
+                        <div class="card-body text-center">
+                            <span class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">Rekomendasi</span>
+                            <h5 class="card-title">Pro</h5>
+                            <h3 class="fw-bold my-4">Rp 899.000</h3>
+                            <p class="text-muted">Cocok untuk bisnis berkembang</p>
+                            <ul class="list-unstyled my-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 3 Bot Telegram</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 2000 License Key/Bulan</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> 10 Produk</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Support via Telegram</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Anti-Crack System</li>
+                                <li class="mb-2"><i class="bi bi-x text-muted me-2"></i> <span class="text-muted">Priority Support</span></li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">Pilih Paket</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card pricing-card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Enterprise</h5>
+                            <h3 class="fw-bold my-4">Rp 1.499.000</h3>
+                            <p class="text-muted">Cocok untuk bisnis besar</p>
+                            <ul class="list-unstyled my-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Unlimited Bot Telegram</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Unlimited License Key</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Unlimited Produk</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Support 24/7</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Advanced Anti-Crack</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i> Priority Support</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary">Pilih Paket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Limited Offer -->
+    <section class="section-padding bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Penawaran Terbatas!</h2>
+                    <p class="mb-5">Dapatkan diskon 20% untuk pembelian paket Pro dan Enterprise dalam waktu terbatas</p>
+                    
+                    <div class="d-flex justify-content-center mb-5" id="countdown">
+                        <div class="mx-2">
+                            <div class="countdown-box">
+                                <span id="days">00</span>
+                            </div>
                             <small>Hari</small>
                         </div>
-                        <div class="countdown-item">
-                            <div class="display-6 fw-bold" id="hours">00</div>
+                        <div class="mx-2">
+                            <div class="countdown-box">
+                                <span id="hours">00</span>
+                            </div>
                             <small>Jam</small>
                         </div>
-                        <div class="countdown-item">
-                            <div class="display-6 fw-bold" id="minutes">00</div>
+                        <div class="mx-2">
+                            <div class="countdown-box">
+                                <span id="minutes">00</span>
+                            </div>
                             <small>Menit</small>
                         </div>
-                        <div class="countdown-item">
-                            <div class="display-6 fw-bold" id="seconds">00</div>
+                        <div class="mx-2">
+                            <div class="countdown-box">
+                                <span id="seconds">00</span>
+                            </div>
                             <small>Detik</small>
                         </div>
                     </div>
                     
-                    <a href="#harga" class="btn btn-warning btn-lg px-5 py-3 fw-bold">DAPATKAN DISKON SEKARANG</a>
-                    
-                    <div class="mt-4">
-                        <div class="badge bg-light text-dark py-2 px-3">
-                            <i class="bi bi-arrow-repeat me-1"></i> 100% Uang Kembali 7 Hari
-                        </div>
-                    </div>
+                    <a href="#harga" class="btn btn-light btn-lg px-5">Beli Sekarang</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- FAQ Section -->
-        <section id="faq" class="section-padding bg-dark">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Pertanyaan Umum</h2>
-                        <p class="lead text-muted">Temukan jawaban atas pertanyaan yang sering diajukan</p>
-                    </div>
+    <!-- FAQ -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Pertanyaan Umum</h2>
+                    <p class="text-muted">Temukan jawaban atas pertanyaan yang sering diajukan</p>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="accordion" id="faqAccordion">
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                                        Apa saja requirement server untuk menjalankan sistem ini?
-                                    </button>
-                                </h2>
-                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Minimum requirement: PHP 8.1, MySQL 5.7 atau MariaDB 10.3, Web Server (Apache/Nginx). Rekomendasi: PHP 8.2, MySQL 8.0, setidaknya 2GB RAM, dan SSD storage untuk performa optimal.
-                                    </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                    Apa itu Bot Telegram Jualan Premium?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Bot Telegram Jualan Premium adalah sistem otomatis yang memungkinkan Anda menjual produk digital melalui Telegram dengan sistem license key yang aman. Bot akan melayani customer 24/7 tanpa perlu Anda mengawasi terus menerus.
                                 </div>
                             </div>
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                                        Berapa lama proses setup setelah pembelian?
-                                    </button>
-                                </h2>
-                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Untuk paket Basic, Anda bisa melakukan setup sendiri menggunakan dokumentasi yang disediakan (1-2 jam). Paket Pro dan Enterprise termasuk bantuan setup dari tim kami (maksimal 24 jam setelah pembayaran dikonfirmasi).
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    Bagaimana cara kerjanya?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Customer mengirim perintah ke bot Telegram (contoh: /buy net1b). Bot akan menginstruksikan pembayaran. Setelah pembayaran dikonfirmasi, bot secara otomatis mengirimkan license key kepada customer. Semua proses otomatis tanpa campur tangan Anda.
                                 </div>
                             </div>
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                                        Apakah sistem ini aman dari crack dan pembajakan?
-                                    </button>
-                                </h2>
-                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Ya, kami menggunakan sistem keamanan multi-layer termasuk double device binding (HWID + IP), encryption database, rate limiting, dan real-time license validation. Namun, implementasi produksi memerlukan konfigurasi server dan audit keamanan tambahan.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    Apakah sistem ini aman dari crack?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Ya, kami menggunakan sistem enkripsi AES-256 untuk license key dan sistem verifikasi dua langkah. Selain itu, sistem kami memiliki deteksi otomatis terhadap aktivitas mencurigakan dan akan memblokir percobaan crack.
                                 </div>
                             </div>
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                                        Bagaimana proses refund/garansi uang kembali?
-                                    </button>
-                                </h2>
-                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Kami menawarkan garansi 7 hari uang kembali jika sistem tidak bekerja seperti yang dijelaskan. Untuk mengklaim garansi, silakan hubungi kami melalui Telegram dengan menyertakan bukti pembayaran dan penjelasan detail mengenai kendala yang dihadapi.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                    Metode pembayaran apa saja yang didukung?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sistem kami mendukung berbagai metode pembayaran: transfer bank (BCA, BNI, BRI, Mandiri), e-wallet (Gopay, OVO, Dana, LinkAja), QRIS, dan bahkan cryptocurrency (Bitcoin, Ethereum, USDT).
                                 </div>
                             </div>
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-                                        Apakah saya mendapatkan update setelah pembelian?
-                                    </button>
-                                </h2>
-                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Untuk paket Basic dan Pro, Anda mendapatkan update selama 30 dan 90 hari respectively. Paket Enterprise mendapatkan lifetime update. Update termasuk perbaikan bug, peningkatan keamanan, dan penambahan fitur minor.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                    Bagaimana jika saya butuh bantuan teknis?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Kami menyediakan support melalui Telegram dengan respon cepat. Untuk paket Pro dan Enterprise, Anda mendapatkan priority support 24/7. Kami juga memiliki dokumentasi lengkap dan video tutorial.
                                 </div>
                             </div>
-                            <div class="accordion-item bg-secondary border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
-                                        Bagaimana cara menghubungi support jika ada masalah?
-                                    </button>
-                                </h2>
-                                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        Support tersedia melalui Telegram selama jam kerja (09.00 - 18.00 WIB). Response time untuk paket Basic maksimal 24 jam, Pro maksimal 12 jam, dan Enterprise maksimal 2 jam. Pastikan Anda sudah membaca dokumentasi sebelum menghubungi support.
-                                    </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                                    Apakah bisa custom fitur sesuai kebutuhan?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Tentu saja. Untuk paket Enterprise, kami menyediakan layanan customisasi sesuai kebutuhan bisnis Anda. Silakan hubungi kami untuk diskusi lebih lanjut mengenai kebutuhan custom fitur.
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Kontak Section -->
-        <section id="kontak" class="section-padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="fw-bold mb-3">Hubungi Kami</h2>
-                        <p class="lead text-muted">Butuh bantuan atau memiliki pertanyaan? Silakan hubungi kami</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="card bg-dark h-100">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Kontak Info</h4>
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-telegram display-6 text-primary"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">Telegram</h5>
-                                        <a href="https://t.me/yourusername" class="text-muted">@yourusername</a>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-whatsapp display-6 text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">WhatsApp</h5>
-                                        <a href="https://wa.me/620000000000" class="text-muted">+62xxx-xxxx-xxxx</a>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <i class="bi bi-globe display-6 text-info"></i>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0">Website</h5>
-                                        <a href="https://yourwebsite.com" class="text-muted">yourwebsite.com</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="card bg-dark">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Kirim Pesan</h4>
-                                <form id="contactForm">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="name" class="form-label">Nama Lengkap</label>
-                                            <input type="text" class="form-control bg-secondary border-0 text-white" id="name" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control bg-secondary border-0 text-white" id="email" required>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="message" class="form-label">Pesan</label>
-                                            <textarea class="form-control bg-secondary border-0 text-white" id="message" rows="5" required></textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary px-4 py-2">Kirim Pesan</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Kontak -->
+    <section class="section-padding" id="demo">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">Hubungi Kami</h2>
+                    <p class="text-muted">Butuh bantuan atau ingin mencoba demo? Hubungi kami melalui channel berikut</p>
                 </div>
             </div>
-        </section>
-    </main>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4 text-center">
+                    <a href="https://t.me/example" class="text-decoration-none" aria-label="Telegram">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-telegram display-4 text-primary mb-3"></i>
+                                <h5>Telegram</h5>
+                                <p class="text-muted">@botjualanpremium</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <a href="https://wa.me/628123456789" class="text-decoration-none" aria-label="WhatsApp">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-whatsapp display-4 text-primary mb-3"></i>
+                                <h5>WhatsApp</h5>
+                                <p class="text-muted">+62 812-3456-7890</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <a href="https://www.example.com" class="text-decoration-none" aria-label="Website">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-globe display-4 text-primary mb-3"></i>
+                                <h5>Website</h5>
+                                <p class="text-muted">www.botjualanpremium.com</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark">
+    <footer class="bg-dark text-white py-4">
         <div class="container">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <div class="mb-3 mb-md-0">
-                    <span class="text-muted">&copy; 2024 Bot License System. All rights reserved.</span>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 Bot Telegram Jualan Premium. All rights reserved.</p>
+                    <p class="mb-0 small">By <a href="#" class="text-white">Ramdan</a> | <a href="#" class="text-white">Terms of Service</a> | <a href="#" class="text-white">Privacy Policy</a></p>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="form-check form-switch me-3">
-                        <input class="form-check-input" type="checkbox" id="footerThemeToggle">
-                        <label class="form-check-label text-muted" for="footerThemeToggle">Mode Terang</label>
-                    </div>
-                    <div>
-                        <a href="#" class="text-muted me-3">Terms of Service</a>
-                        <a href="#" class="text-muted">Privacy Policy</a>
-                    </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-outline-light btn-sm" id="footerThemeToggle">
+                        <i class="bi bi-moon-fill"></i> Toggle Mode Gelap
+                    </button>
                 </div>
-            </div>
-            <div class="text-center mt-3">
-                <small class="text-muted">Created with <i class="bi bi-heart-fill text-danger"></i> by Ramdan</small>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Action Button -->
-    <div class="floating-action">
-        <div class="floating-buttons">
-            <a href="https://wa.me/620000000000" class="btn btn-success" aria-label="Hubungi via WhatsApp">
-                <i class="bi bi-whatsapp"></i>
-            </a>
-            <a href="https://t.me/yourusername" class="btn btn-primary" aria-label="Hubungi via Telegram">
-                <i class="bi bi-telegram"></i>
-            </a>
-            <button class="btn btn-secondary" id="floatingThemeToggle" aria-label="Toggle tema">
-                <i class="bi bi-palette"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Bootstrap 5 JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // === Toggle Theme ===
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check for saved theme preference or respect OS preference
-            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-            setTheme(savedTheme);
+        // Toggle Theme
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
             
-            // Set up theme toggles
-            const themeToggles = document.querySelectorAll('#themeToggle, #footerThemeToggle, #floatingThemeToggle');
-            themeToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
-                    setTheme(newTheme);
-                    localStorage.setItem('theme', newTheme);
-                });
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            // Update button text
+            const themeButtons = document.querySelectorAll('#themeToggle, #footerThemeToggle');
+            themeButtons.forEach(button => {
+                const icon = button.querySelector('i');
+                if (isDarkMode) {
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                    button.innerHTML = icon.outerHTML + ' Mode Terang';
+                } else {
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                    button.innerHTML = icon.outerHTML + ' Mode Gelap';
+                }
+            });
+        }
+        
+        // Initialize theme from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            const themeButtons = document.querySelectorAll('#themeToggle, #footerThemeToggle');
+            themeButtons.forEach(button => {
+                button.addEventListener('click', toggleTheme);
+                
+                // Update initial button text
+                const icon = button.querySelector('i');
+                if (savedDarkMode) {
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                    button.innerHTML = icon.outerHTML + ' Mode Terang';
+                }
             });
             
-            // Set the toggle state based on current theme
-            function updateToggleState() {
-                const isLightMode = document.body.classList.contains('light-mode');
-                themeToggles.forEach(toggle => {
-                    if (toggle.type === 'checkbox') {
-                        toggle.checked = isLightMode;
-                    }
-                });
-            }
-            
-            function setTheme(theme) {
-                if (theme === 'light') {
-                    document.body.classList.add('light-mode');
-                } else {
-                    document.body.classList.remove('light-mode');
-                }
-                updateToggleState();
-            }
-            
-            // === Navbar Shrink on Scroll ===
+            // Navbar shrink on scroll
             const navbar = document.getElementById('mainNav');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    navbar.classList.add('shrink');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('navbar-shrink');
                 } else {
-                    navbar.classList.remove('shrink');
+                    navbar.classList.remove('navbar-shrink');
                 }
             });
             
-            // === Smooth Scroll for Navigation Links ===
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+            // Terminal simulation
+            const terminalInput = document.getElementById('terminal-input');
+            const terminalOutput = document.getElementById('terminal-output');
+            
+            terminalInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const command = this.value.trim();
+                    this.value = '';
                     
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+                    if (command) {
+                        // Add user command to output
+                        const userCommand = document.createElement('div');
+                        userCommand.textContent = `$ ${command}`;
+                        terminalOutput.appendChild(userCommand);
+                        
+                        // Process command
+                        if (command.startsWith('/buy')) {
+                            const productCode = command.split(' ')[1];
+                            const products = {
+                                'net1b': 'Netflix 1 Bulan',
+                                'spo3b': 'Spotify 3 Bulan',
+                                'yt1b': 'YouTube Premium 1 Bulan',
+                                'can1b': 'Canva Pro 1 Bulan'
+                            };
+                            
+                            if (products[productCode]) {
+                                // Show success toast
+                                showToast(`Pembelian berhasil untuk ${products[productCode]} ✅`, 'success');
+                                
+                                // Add bot response to output
+                                const botResponse = document.createElement('div');
+                                botResponse.innerHTML = `Bot: Terima kasih! License key untuk ${products[productCode]} telah dikirim.`;
+                                terminalOutput.appendChild(botResponse);
+                            } else {
+                                // Show error toast
+                                showToast('Perintah tidak dikenali ❌', 'error');
+                                
+                                // Add bot response to output
+                                const botResponse = document.createElement('div');
+                                botResponse.innerHTML = 'Bot: Perintah tidak dikenali. Gunakan /buy [kode produk]';
+                                terminalOutput.appendChild(botResponse);
+                            }
+                        } else {
+                            // Show error toast
+                            showToast('Perintah tidak dikenali ❌', 'error');
+                            
+                            // Add bot response to output
+                            const botResponse = document.createElement('div');
+                            botResponse.innerHTML = 'Bot: Perintah tidak dikenali. Gunakan /buy [kode produk]';
+                            terminalOutput.appendChild(botResponse);
+                        }
+                        
+                        // Scroll to bottom of terminal
+                        terminalOutput.scrollTop = terminalOutput.scrollHeight;
                     }
-                });
+                }
             });
             
-            // === Countdown Timer ===
-            // Set the target date (easily editable)
-            const targetDate = new Date('2024-12-31T23:59:59').getTime();
+            // Toast notification function
+            function showToast(message, type) {
+                // Create toast element
+                const toast = document.createElement('div');
+                toast.classList.add('toast', 'align-items-center', 'text-white', 
+                                  type === 'success' ? 'bg-success' : 'bg-danger');
+                toast.setAttribute('role', 'alert');
+                toast.setAttribute('aria-live', 'assertive');
+                toast.setAttribute('aria-atomic', 'true');
+                
+                toast.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                `;
+                
+                // Add to container or create one if it doesn't exist
+                let toastContainer = document.querySelector('.toast-container');
+                if (!toastContainer) {
+                    toastContainer = document.createElement('div');
+                    toastContainer.classList.add('toast-container', 'position-fixed', 'top-0', 'end-0', 'p-3');
+                    document.body.appendChild(toastContainer);
+                }
+                
+                toastContainer.appendChild(toast);
+                
+                // Initialize and show toast
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+                
+                // Remove toast from DOM after it's hidden
+                toast.addEventListener('hidden.bs.toast', function() {
+                    toast.remove();
+                });
+            }
             
+            // Countdown timer
             function updateCountdown() {
+                // Set target date (can be easily edited)
+                const targetDate = new Date('2023-12-31T23:59:59').getTime();
                 const now = new Date().getTime();
                 const distance = targetDate - now;
                 
                 if (distance < 0) {
-                    document.getElementById('countdown').innerHTML = '<div class="display-6">Penawaran telah berakhir!</div>';
+                    document.getElementById('countdown').innerHTML = '<h4>Penawaran telah berakhir!</h4>';
                     return;
                 }
                 
@@ -1177,186 +1009,128 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
             }
             
-            // Update countdown every second
+            // Initialize countdown and update every second
+            updateCountdown();
             setInterval(updateCountdown, 1000);
-            updateCountdown(); // Initial call
             
-            // === Animated Counters ===
-            function animateCounter(elementId, target, duration = 2000) {
-                const element = document.getElementById(elementId);
-                const start = 0;
-                const increment = target / (duration / 16); // 60fps
-                let current = start;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        element.textContent = target.toLocaleString();
-                        clearInterval(timer);
-                    } else {
-                        element.textContent = Math.floor(current).toLocaleString();
-                    }
-                }, 16);
-            }
-            
-            // Initialize counters when they come into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounter('profitCounter', 12450000);
-                        animateCounter('userCounter', 3250);
-                        animateCounter('transactionCounter', 48);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            const analyticsSection = document.getElementById('analytics');
-            if (analyticsSection) {
-                observer.observe(analyticsSection);
-            }
-            
-            // === Simple Chart Mockups ===
+            // Simple chart initialization
             function initCharts() {
-                // Profit Chart
-                const profitCtx = document.getElementById('profitChart').getContext('2d');
+                const salesCtx = document.getElementById('salesChart').getContext('2d');
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
                 
-                // Create gradient
-                const profitGradient = profitCtx.createLinearGradient(0, 0, 0, 200);
-                profitGradient.addColorStop(0, 'rgba(108, 92, 231, 0.6)');
-                profitGradient.addColorStop(1, 'rgba(108, 92, 231, 0.1)');
+                // Simple gradient function
+                function createGradient(ctx, color1, color2) {
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+                    gradient.addColorStop(0, color1);
+                    gradient.addColorStop(1, color2);
+                    return gradient;
+                }
                 
-                // Draw chart
-                profitCtx.beginPath();
-                profitCtx.moveTo(0, 200);
+                // Mock sales data
+                const salesData = {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                    datasets: [{
+                        label: 'Penjualan',
+                        data: [120, 190, 300, 500, 200, 300],
+                        backgroundColor: createGradient(salesCtx, 'rgba(13, 110, 253, 0.6)', 'rgba(13, 110, 253, 0.1)'),
+                        borderColor: '#0d6efd',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                };
                 
-                // Simulated data points
-                const profitData = [120, 150, 180, 200, 170, 210, 190];
-                const maxProfit = Math.max(...profitData);
+                // Mock revenue data
+                const revenueData = {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+                    datasets: [{
+                        label: 'Pendapatan (Juta)',
+                        data: [2.5, 4.0, 6.5, 10.2, 4.5, 7.8],
+                        backgroundColor: createGradient(revenueCtx, 'rgba(25, 135, 84, 0.6)', 'rgba(25, 135, 84, 0.1)'),
+                        borderColor: '#198754',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                };
                 
-                profitData.forEach((value, index) => {
-                    const x = (index / (profitData.length - 1)) * 400;
-                    const y = 200 - (value / maxProfit) * 180;
-                    profitCtx.lineTo(x, y);
-                });
-                
-                profitCtx.lineTo(400, 200);
-                profitCtx.closePath();
-                profitCtx.fillStyle = profitGradient;
-                profitCtx.fill();
-                
-                profitCtx.strokeStyle = '#6c5ce7';
-                profitCtx.lineWidth = 2;
-                profitCtx.stroke();
-                
-                // Product Chart
-                const productCtx = document.getElementById('productChart').getContext('2d');
-                const productData = [35, 25, 20, 15, 5]; // percentages
-                const productColors = ['#6c5ce7', '#00b894', '#fdcb6e', '#d63031', '#0984e3'];
-                
-                let startAngle = 0;
-                productData.forEach((value, index) => {
-                    const sliceAngle = (value / 100) * 2 * Math.PI;
+                // Draw simple charts using path drawing
+                function drawSimpleChart(ctx, data, color) {
+                    const width = ctx.canvas.width;
+                    const height = ctx.canvas.height;
                     
-                    productCtx.beginPath();
-                    productCtx.moveTo(200, 100);
-                    productCtx.arc(200, 100, 80, startAngle, startAngle + sliceAngle);
-                    productCtx.closePath();
+                    // Clear canvas
+                    ctx.clearRect(0, 0, width, height);
                     
-                    productCtx.fillStyle = productColors[index];
-                    productCtx.fill();
+                    // Find max value for scaling
+                    const maxValue = Math.max(...data) * 1.1;
                     
-                    startAngle += sliceAngle;
-                });
-                
-                // Add center circle
-                productCtx.beginPath();
-                productCtx.arc(200, 100, 30, 0, 2 * Math.PI);
-                productCtx.fillStyle = '#181b20';
-                productCtx.fill();
-            }
-            
-            // Initialize charts when they come into view
-            const chartObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        initCharts();
-                        chartObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            const chartsSection = document.querySelector('.chart-container');
-            if (chartsSection) {
-                chartObserver.observe(chartsSection);
-            }
-            
-            // === Quick Order Code Copy Functionality ===
-            document.querySelectorAll('.quick-order-code').forEach(codeElement => {
-                codeElement.addEventListener('click', function() {
-                    const code = this.querySelector('h5').textContent;
-                    navigator.clipboard.writeText(code).then(() => {
-                        const tooltip = this.querySelector('.copied-tooltip');
-                        tooltip.classList.add('show');
-                        setTimeout(() => {
-                            tooltip.classList.remove('show');
-                        }, 2000);
+                    // Draw area
+                    ctx.beginPath();
+                    ctx.moveTo(0, height);
+                    
+                    data.forEach((value, index) => {
+                        const x = (index / (data.length - 1)) * width;
+                        const y = height - (value / maxValue) * height;
+                        ctx.lineTo(x, y);
                     });
-                });
-            });
-            
-            // === Contact Form Validation ===
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
                     
-                    // Simple validation
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const message = document.getElementById('message').value;
+                    ctx.lineTo(width, height);
+                    ctx.closePath();
                     
-                    if (!name || !email || !message) {
-                        alert('Harap isi semua field yang diperlukan.');
-                        return;
-                    }
+                    // Create gradient for area
+                    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+                    gradient.addColorStop(0, color.replace('0.6', '0.4'));
+                    gradient.addColorStop(1, color.replace('0.6', '0.1'));
                     
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        alert('Harap masukkan alamat email yang valid.');
-                        return;
-                    }
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
                     
-                    // In a real application, you would send the form data to a server here
-                    alert('Pesan Anda telah terkirim! Kami akan menghubungi Anda segera.');
-                    contactForm.reset();
-                });
+                    // Draw line
+                    ctx.beginPath();
+                    data.forEach((value, index) => {
+                        const x = (index / (data.length - 1)) * width;
+                        const y = height - (value / maxValue) * height;
+                        
+                        if (index === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    });
+                    
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = color.replace('0.6', '1');
+                    ctx.stroke();
+                    
+                    // Draw points
+                    data.forEach((value, index) => {
+                        const x = (index / (data.length - 1)) * width;
+                        const y = height - (value / maxValue) * height;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, 4, 0, Math.PI * 2);
+                        ctx.fillStyle = '#fff';
+                        ctx.fill();
+                        ctx.strokeStyle = color.replace('0.6', '1');
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    });
+                }
+                
+                // Draw the charts
+                drawSimpleChart(salesCtx, salesData.datasets[0].data, 'rgba(13, 110, 253, 0.6)');
+                drawSimpleChart(revenueCtx, revenueData.datasets[0].data, 'rgba(25, 135, 84, 0.6)');
             }
             
-            // Initialize animations for elements
-            const animatedElements = document.querySelectorAll('.animate-fade-in');
-            animatedElements.forEach(element => {
-                element.style.opacity = 0;
-            });
-            
-            // Animate on scroll
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeIn 0.6s ease forwards';
-                        fadeObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            animatedElements.forEach(element => {
-                fadeObserver.observe(element);
-            });
+            // Initialize charts when page loads
+            window.addEventListener('load', initCharts);
         });
     </script>
 </body>
